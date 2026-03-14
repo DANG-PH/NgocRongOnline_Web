@@ -78,7 +78,7 @@ function HomePage() {
                   </svg>
                 </div>
                 <div className="flex-1">
-                  <a href="https://github.com/DANG-PH/NRO_ONLINE/releases/tag/version_v1.0">
+                  <a href="https://github.com/DANG-PH/NRO_ONLINE/releases">
                     <div className="text-xs opacity-80 mb-1">Tải cho</div>
                     <div className="text-lg font-bold">Windows</div>
                   </a>
