@@ -107,6 +107,8 @@
         const { credential } = response;
         if (!credential) return;
 
+        console.log("TOKEN FROM GOOGLE: "+ credential)
+
         console.log(`${API_URL}/auth/login-google`)
         // Gọi backend
         const res = await axios.post(
