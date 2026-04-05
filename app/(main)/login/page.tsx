@@ -69,9 +69,6 @@
 
   const data = await response.json();
 
-  console.log('Response:', data);
-  console.log('Status:', response.status);
-
   if (response.ok) {
     const old = JSON.parse(localStorage.getItem('currentUser') || '{}');
 
@@ -107,9 +104,6 @@
         const { credential } = response;
         if (!credential) return;
 
-        console.log("TOKEN FROM GOOGLE: "+ credential)
-
-        console.log(`${API_URL}/auth/login-google`)
         // Gọi backend
         const res = await axios.post(
           `${API_URL}/auth/login-google`,
@@ -133,8 +127,6 @@
             ...currentUser, // chỉ ghi đè auth_id, role
           })
         );
-      
-        console.log("Saved user:", localStorage.getItem('currentUser'));
 
         // Redirect sang /user
         router.push('/user');
@@ -275,7 +267,6 @@
             <GoogleLogin
               onSuccess={handleSuccess}
               onError={() => {
-                console.log('Login Failed');
               }}
             />;
           </GoogleOAuthProvider>
