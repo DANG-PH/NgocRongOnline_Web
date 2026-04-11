@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Account {
   username: string;
@@ -11,6 +12,7 @@ interface ApiResponse {
 }
 
 function AccHistory() {
+  const router = useRouter();
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -62,28 +64,28 @@ function AccHistory() {
     }
   };
 
-  if (loading) {
+  if (loading)
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="min-h-screen flex items-center justify-center  bg-no-repeat bg-center bg-fixed bg-cover" style={{ backgroundImage: "url('/assets/br.jpg')" }}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Đang tải dữ liệu...</p>
+          <div className="animate-spin h-16 w-16 border-b-2 border-blue-500 mx-auto rounded-full"></div>
+          <p className="mt-4 text-gray-600">Đang tải thông tin...</p>
         </div>
       </div>
     );
-  }
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md">
-          <h3 className="text-red-800 font-semibold mb-2">Lỗi</h3>
-          <p className="text-red-600">{error}</p>
+      <div className="flex items-center justify-center min-h-screen bg-gray-900 bg-no-repeat bg-center bg-fixed bg-cover relative" style={{ backgroundImage: "url('/assets/br.jpg')" }}>
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+        <div className="bg-black/60 backdrop-blur-md border border-red-500/30 rounded-2xl p-8 max-w-md relative z-10 shadow-2xl text-center">
+          <h3 className="text-red-400 font-bold text-2xl mb-3 drop-shadow-[0_0_8px_rgba(248,113,113,0.8)]">Lỗi</h3>
+          <p className="text-red-200 mb-6 font-medium">{error}</p>
           <button
             onClick={fetchAccounts}
-            className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+            className="w-full bg-red-600/80 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors font-semibold shadow-[0_4px_10px_rgba(220,38,38,0.3)] cursor-pointer"
           >
-            Thử lại
+            Thử Lại
           </button>
         </div>
       </div>
@@ -91,84 +93,99 @@ function AccHistory() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">
-          Lịch sử tài khoản đã mua
-        </h1>
-        <p className="text-gray-600">
-          Tổng số tài khoản: <span className="font-semibold">{accounts.length}</span>
-        </p>
-      </div>
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-no-repeat bg-center bg-fixed bg-cover relative" style={{ backgroundImage: "url('/assets/br.jpg')" }}>
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
 
-      {accounts.length === 0 ? (
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-12 text-center">
-          <p className="text-gray-600 text-lg">Chưa có tài khoản nào</p>
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="mb-6">
+          <button
+            onClick={() => router.push('/user')}
+            className="flex items-center text-white bg-black/40 hover:bg-black/60 px-4 py-2 rounded-lg font-medium transition-colors backdrop-blur-sm w-fit shadow-[0_0_10px_rgba(255,255,255,0.1)] border border-white/10"
+          >
+            ← Quay lại
+          </button>
         </div>
-      ) : (
-        <div className="bg-white shadow-md rounded-lg overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-200">
-                <tr>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    STT
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Tên đăng nhập
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Mật khẩu
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Thao tác
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {accounts.map((account, index) => (
-                  <tr key={index} className="hover:bg-gray-50 transition">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {index + 1}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm font-medium text-gray-900">
-                        {account.username}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <code className="text-sm bg-gray-100 px-2 py-1 rounded text-gray-800">
-                        {account.password}
-                      </code>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      <button
-                        onClick={() => {
-                          navigator.clipboard.writeText(
-                            `Username: ${account.username}\nPassword: ${account.password}`
-                          );
-                          alert('Đã sao chép!');
-                        }}
-                        className="text-blue-600 hover:text-blue-800 font-medium transition"
-                      >
-                        Sao chép
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <div className="mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-white/10 pb-6">
+          <div>
+            <h1 className="text-3xl sm:text-4xl font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] uppercase">
+              Lịch sử tài khoản đã mua
+            </h1>
+            <p className="text-gray-200 mt-2 text-lg drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] font-medium">
+              Tổng số tài khoản: <span className="font-bold text-blue-400 drop-shadow-[0_0_5px_rgba(96,165,250,0.8)] text-xl">{accounts.length}</span>
+            </p>
           </div>
+          <button
+            onClick={fetchAccounts}
+            className="bg-blue-600/80 backdrop-blur-md text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition font-semibold shadow-[0_0_15px_rgba(37,99,235,0.4)] flex items-center gap-2 uppercase tracking-wide cursor-pointer"
+          >
+            <span>🔄</span> Làm mới
+          </button>
         </div>
-      )}
 
-      <div className="mt-6">
-        <button
-          onClick={fetchAccounts}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium"
-        >
-          Làm mới
-        </button>
+        {accounts.length === 0 ? (
+          <div className="bg-black/50 backdrop-blur-md border border-white/10 rounded-2xl p-16 text-center shadow-2xl">
+            <div className="text-6xl mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">📦</div>
+            <p className="text-gray-200 text-xl font-medium drop-shadow-md">Chưa có tài khoản nào</p>
+          </div>
+        ) : (
+          <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead className="bg-black/40 border-b border-white/10 text-gray-300">
+                  <tr>
+                    <th className="px-6 py-5 text-sm font-bold uppercase tracking-wider">
+                      STT
+                    </th>
+                    <th className="px-6 py-5 text-sm font-bold uppercase tracking-wider">
+                      Tên đăng nhập
+                    </th>
+                    <th className="px-6 py-5 text-sm font-bold uppercase tracking-wider">
+                      Mật khẩu
+                    </th>
+                    <th className="px-6 py-5 text-sm font-bold uppercase tracking-wider text-right">
+                      Thao tác
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/10 text-gray-200">
+                  {accounts.map((account, index) => (
+                    <tr key={index} className="hover:bg-white/5 transition-colors">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <span className="bg-white/10 px-3 py-1 rounded-full shadow-inner">{index + 1}</span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className="text-lg font-bold text-white drop-shadow-md">
+                          {account.username}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center gap-2">
+                          <code className="text-sm bg-black/50 border border-white/5 px-3 py-1.5 rounded-lg text-gray-300 font-mono tracking-wider shadow-inner">
+                            {account.password}
+                          </code>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(
+                              `Username: ${account.username}\nPassword: ${account.password}`
+                            );
+                            alert('Đã sao chép!');
+                          }}
+                          className="bg-white/10 hover:bg-white/20 text-white font-medium px-4 py-2 rounded-lg transition-colors inline-flex items-center gap-2 shadow-sm cursor-pointer"
+                        >
+                          📋 Sao chép
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

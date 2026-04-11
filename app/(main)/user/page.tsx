@@ -81,7 +81,7 @@ export default function User() {
 
   if (loading)
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="min-h-screen flex items-center justify-center  bg-no-repeat bg-center bg-fixed bg-cover" style={{ backgroundImage: "url('/assets/br.jpg')" }}>
         <div className="text-center">
           <div className="animate-spin h-16 w-16 border-b-2 border-blue-500 mx-auto rounded-full"></div>
           <p className="mt-4 text-gray-600">Đang tải thông tin...</p>
@@ -97,22 +97,21 @@ export default function User() {
   }
 
   return (
+    <div className="min-h-screen p-4 md:p-8 font-sans bg-no-repeat bg-center bg-fixed bg-cover relative" style={{ backgroundImage: "url('/assets/br.jpg')" }}>
+      {/* Dark overlay to make content more readable */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
 
-    <div className="min-h-screen bg-[#f4f7fa] p-4 md:p-8 font-sans">
-
-
-      <div className="max-w-7xl mx-auto mb-8">
+      <div className="max-w-7xl mx-auto mb-8 relative z-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-700">Thông tin nhân vật</h1>
-            <p className="text-gray-400 text-sm mt-1">Hồ sơ người dùng</p>
+            <h1 className="text-3xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] uppercase">Thông tin nhân vật</h1>
+            <p className="text-gray-200 text-sm mt-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">Hồ sơ người dùng</p>
           </div>
 
-
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-2 md:gap-3">
             <button
               onClick={() => router.push("/acchistory")}
-              className="bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-blue-500 px-4 py-2 rounded shadow-sm text-sm font-medium transition-colors"
+              className="bg-black/50 backdrop-blur-sm border border-white/20 text-gray-100 hover:bg-white/20 hover:text-white px-4 py-2 rounded shadow-[0_4px_6px_rgba(0,0,0,0.3)] text-sm font-medium transition-all hover:-translate-y-0.5"
             >
               Lịch sử mua acc
             </button>
@@ -120,31 +119,31 @@ export default function User() {
               onClick={() => {
                 router.push("/shop");
               }}
-              className="bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-blue-500 px-4 py-2 rounded shadow-sm text-sm font-medium transition-colors"
+              className="bg-black/50 backdrop-blur-sm border border-white/20 text-gray-100 hover:bg-white/20 hover:text-white px-4 py-2 rounded shadow-[0_4px_6px_rgba(0,0,0,0.3)] text-sm font-medium transition-all hover:-translate-y-0.5 uppercase"
             >
-              shop game
+              Shop game
             </button>
             <button
               onClick={() => {
                 router.push("/chatbot");
               }}
-              className="bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-blue-500 px-4 py-2 rounded shadow-sm text-sm font-medium transition-colors"
+              className="bg-black/50 backdrop-blur-sm border border-white/20 text-gray-100 hover:bg-white/20 hover:text-white px-4 py-2 rounded shadow-[0_4px_6px_rgba(0,0,0,0.3)] text-sm font-medium transition-all hover:-translate-y-0.5 uppercase"
             >
-              chatbot
+              Chatbot
             </button>
             <button
               onClick={() => {
                 router.push("/change-password");
               }}
-              className="bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-blue-500 px-4 py-2 rounded shadow-sm text-sm font-medium transition-colors"
+              className="bg-black/50 backdrop-blur-sm border border-white/20 text-gray-100 hover:bg-white/20 hover:text-white px-4 py-2 rounded shadow-[0_4px_6px_rgba(0,0,0,0.3)] text-sm font-medium transition-all hover:-translate-y-0.5"
             >
-              đổi mật khẩu
+              Đổi mật khẩu
             </button>
             <button
               onClick={() => router.push("/pay")}
-              className="bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-blue-500 px-4 py-2 rounded shadow-sm text-sm font-medium transition-colors"
+              className="bg-black/50 backdrop-blur-sm border border-white/20 text-gray-100 hover:bg-white/20 hover:text-white px-4 py-2 rounded shadow-[0_4px_6px_rgba(0,0,0,0.3)] text-sm font-medium transition-all hover:-translate-y-0.5"
             >
-              Tài khoản
+              Ví của tôi
             </button>
             <button
               onClick={() => {
@@ -152,86 +151,64 @@ export default function User() {
                 dispatch(clearProfile());
                 router.push("/login");
               }}
-              className="bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-blue-500 px-4 py-2 rounded shadow-sm text-sm font-medium transition-colors"
+              className="bg-red-500/50 backdrop-blur-sm border border-red-500/50 text-white hover:bg-red-500/80 px-4 py-2 rounded shadow-[0_4px_6px_rgba(0,0,0,0.3)] text-sm font-medium transition-all hover:-translate-y-0.5"
             >
-              đăng xuất
+              Đăng xuất
             </button>
-
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-white">
-              <h3 className="font-semibold text-gray-700 uppercase text-sm tracking-wider">Thông tin chung</h3>
-              <Icons.User />
-            </div>
-            <div className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-1">
-                  <span className="text-gray-400 text-xs uppercase font-bold">ID Nhân vật</span>
-                  <p className="text-lg font-medium text-gray-700">#{user.id}</p>
-                </div>
-                <div className="space-y-1">
-                  <span className="text-gray-400 text-xs uppercase font-bold">Auth ID</span>
-                  <p className="text-lg font-medium text-gray-700">{user.auth_id}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-white">
-              <h3 className="font-semibold text-gray-700 uppercase text-sm tracking-wider">Trạng thái & Vị trí</h3>
+          {/* Trạng thái & Vị trí */}
+          <div className="bg-black/60 backdrop-blur-md rounded-lg shadow-xl border border-white/10 overflow-hidden text-white transition-all hover:bg-black/70 hover:border-white/20">
+            <div className="px-6 py-4 border-b border-white/10 flex justify-between items-center bg-black/40">
+              <h3 className="font-semibold text-gray-100 uppercase text-sm tracking-wider">Trạng thái & Vị trí</h3>
               <div className="flex gap-2">
-                <span className={`h-3 w-3 rounded-full ${user.daVaoTaiKhoanLanDau ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                <span className={`h-3 w-3 rounded-full ${user.daVaoTaiKhoanLanDau ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]' : 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]'}`}></span>
               </div>
             </div>
             <div className="p-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
                 {/* Location */}
                 <div>
-                  <h4 className="flex items-center gap-2 text-gray-800 font-medium mb-4">
-                    <span className="text-blue-500"><Icons.Location /></span> Vị trí hiện tại
+                  <h4 className="flex items-center gap-2 text-gray-100 font-medium mb-4 pb-2 border-b border-white/10">
+                    <span className="text-blue-400 drop-shadow-[0_0_5px_rgba(96,165,250,0.8)]"><Icons.Location /></span> Vị trí hiện tại
                   </h4>
                   <ul className="space-y-3">
-                    <li className="flex justify-between text-sm">
-                      <span className="text-gray-500">Map:</span>
-                      <span className="font-semibold text-gray-700">{user.mapHienTai}</span>
+                    <li className="flex justify-between items-center text-sm">
+                      <span className="text-gray-400">Map:</span>
+                      <span className="font-semibold text-gray-100">{user.mapHienTai}</span>
                     </li>
-                    <li className="flex justify-between text-sm">
-                      <span className="text-gray-500">Tọa độ:</span>
-                      <span className="font-mono bg-gray-100 px-2 py-0.5 rounded text-gray-600">X: {user.x} | Y: {user.y}</span>
+                    <li className="flex justify-between items-center text-sm">
+                      <span className="text-gray-400">Tọa độ:</span>
+                      <span className="font-mono bg-black/50 border border-white/10 px-2 py-1 rounded text-gray-300">X: {user.x} | Y: {user.y}</span>
                     </li>
                   </ul>
                 </div>
 
                 {/* Status */}
                 <div>
-                  <h4 className="flex items-center gap-2 text-gray-800 font-medium mb-4">
-                    <span className="text-blue-500"><Icons.Info /></span> Tình trạng
+                  <h4 className="flex items-center gap-2 text-gray-100 font-medium mb-4 pb-2 border-b border-white/10">
+                    <span className="text-blue-400 drop-shadow-[0_0_5px_rgba(96,165,250,0.8)]"><Icons.Info /></span> Tình trạng
                   </h4>
                   <ul className="space-y-3">
                     <li className="flex justify-between items-center text-sm">
-                      <span className="text-gray-500">Lần đầu đăng nhập:</span>
-                      <span className={`px-2 py-0.5 text-xs rounded font-medium ${user.daVaoTaiKhoanLanDau ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
+                      <span className="text-gray-400">Lần đầu đăng nhập:</span>
+                      <span className={`px-2 py-1 text-xs rounded font-medium border ${user.daVaoTaiKhoanLanDau ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-red-500/20 text-red-400 border-red-500/30'}`}>
                         {user.daVaoTaiKhoanLanDau ? "Đã vào" : "Chưa vào"}
                       </span>
                     </li>
                     <li className="flex justify-between items-center text-sm">
-                      <span className="text-gray-500">Đệ tử:</span>
-                      <span className={`px-2 py-0.5 text-xs rounded font-medium ${user.coDeTu ? 'bg-blue-100 text-blue-600' : 'bg-gray-100 text-gray-500'}`}>
+                      <span className="text-gray-400">Đệ tử:</span>
+                      <span className={`px-2 py-1 text-xs rounded font-medium border ${user.coDeTu ? 'bg-blue-500/20 text-blue-400 border-blue-500/30' : 'bg-gray-500/20 text-gray-400 border-gray-500/30'}`}>
                         {user.coDeTu ? "Đã có" : "Chưa có"}
                       </span>
                     </li>
-                    <li className="flex justify-between text-sm">
-                      <span className="text-gray-500">Vật phẩm Web:</span>
-                      <span className="font-semibold text-gray-700">{user.danhSachVatPhamWeb.length} món</span>
+                    <li className="flex justify-between items-center text-sm">
+                      <span className="text-gray-400">Vật phẩm Web:</span>
+                      <span className="font-semibold text-gray-100">{user.danhSachVatPhamWeb.length} món</span>
                     </li>
                   </ul>
                 </div>
@@ -240,47 +217,43 @@ export default function User() {
           </div>
         </div>
 
-
-        <div className="space-y-6">
-
-
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center justify-between transition hover:shadow-md">
+        <div className="space-y-4">
+          {/* Tổng Vàng */}
+          <div className="bg-black/60 backdrop-blur-md p-5 rounded-lg shadow-xl border border-white/10 flex items-center justify-between transition-all hover:bg-black/70 hover:border-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] cursor-default">
             <div>
-              <p className="text-gray-500 text-sm font-medium mb-1">Tổng Vàng</p>
-              <h3 className="text-2xl font-bold text-blue-500">{formatNumber(user.vang)}</h3>
-              <p className="text-xs text-gray-400 mt-2">Nạp web: {formatNumber(user.vangNapTuWeb)}</p>
+              <p className="text-gray-400 text-sm font-medium mb-1 uppercase tracking-wide">Tổng Vàng</p>
+              <h3 className="text-2xl font-bold text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.8)]">{formatNumber(user.vang)}</h3>
+              <p className="text-xs text-blue-400/70 mt-1">Nạp web: {formatNumber(user.vangNapTuWeb)}</p>
             </div>
-            <div className="h-12 w-12 rounded bg-blue-400 flex items-center justify-center text-white shadow-lg shadow-blue-200">
+            <div className="h-12 w-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
               <Icons.Money />
             </div>
           </div>
 
-
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center justify-between transition hover:shadow-md">
+          {/* Tổng Ngọc */}
+          <div className="bg-black/60 backdrop-blur-md p-5 rounded-lg shadow-xl border border-white/10 flex items-center justify-between transition-all hover:bg-black/70 hover:border-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] cursor-default">
             <div>
-              <p className="text-gray-500 text-sm font-medium mb-1">Tổng Ngọc</p>
-              <h3 className="text-2xl font-bold text-green-500">{formatNumber(user.ngoc)}</h3>
-              <p className="text-xs text-gray-400 mt-2">Nạp web: {formatNumber(user.ngocNapTuWeb)}</p>
+              <p className="text-gray-400 text-sm font-medium mb-1 uppercase tracking-wide">Tổng Ngọc</p>
+              <h3 className="text-2xl font-bold text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.8)]">{formatNumber(user.ngoc)}</h3>
+              <p className="text-xs text-green-400/70 mt-1">Nạp web: {formatNumber(user.ngocNapTuWeb)}</p>
             </div>
-            <div className="h-12 w-12 rounded bg-green-400 flex items-center justify-center text-white shadow-lg shadow-green-200">
+            <div className="h-12 w-12 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
               <Icons.Gem />
             </div>
           </div>
 
-
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center justify-between transition hover:shadow-md">
+          {/* Sức mạnh */}
+          <div className="bg-black/60 backdrop-blur-md p-5 rounded-lg shadow-xl border border-white/10 flex items-center justify-between transition-all hover:bg-black/70 hover:border-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] cursor-default">
             <div>
-              <p className="text-gray-500 text-sm font-medium mb-1">Sức mạnh</p>
-              <h3 className="text-2xl font-bold text-yellow-500">{formatNumber(user.sucManh)}</h3>
-              <p className="text-xs text-gray-400 mt-2">Chỉ số sức mạnh</p>
+              <p className="text-gray-400 text-sm font-medium mb-1 uppercase tracking-wide">Sức mạnh</p>
+              <h3 className="text-2xl font-bold text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.8)]">{formatNumber(user.sucManh)}</h3>
+              <p className="text-xs text-yellow-500/70 mt-1">Chỉ số sức mạnh</p>
             </div>
-            <div className="h-12 w-12 rounded bg-yellow-400 flex items-center justify-center text-white shadow-lg shadow-yellow-200">
+            <div className="h-12 w-12 rounded-full bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center text-yellow-500 shadow-[0_0_15px_rgba(234,179,8,0.2)]">
               <Icons.Power />
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
   );
