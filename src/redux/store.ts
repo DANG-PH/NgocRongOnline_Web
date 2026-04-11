@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import authReducer from "./auth/authSlice";
+import profileReducer from "./profile/profileSlice";
 import rootSaga from "./rootSaga";
 
 const saga = createSagaMiddleware();
@@ -8,6 +9,7 @@ const saga = createSagaMiddleware();
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    profile: profileReducer,
   },
   middleware: (getDefault) => getDefault({ thunk: false }).concat(saga),
 });

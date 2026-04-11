@@ -6,11 +6,11 @@ export interface Post {
   title: string;
   url_anh: string;
   content: string;
-  editor_id: number;  
+  editor_id: number;
   editor_realname: string;
-  status?: string;     
-  create_at?: string;  
-  update_at?: string; 
+  status?: string;
+  create_at?: string;
+  update_at?: string;
 }
 
 function Sukien() {
@@ -40,7 +40,7 @@ function Sukien() {
 
       const data = await response.json();
       console.log('Data from API:', data);
-      
+
       if (data.posts && Array.isArray(data.posts)) {
         setPosts(data.posts);
         console.log('Posts set successfully:', data.posts);
@@ -48,7 +48,7 @@ function Sukien() {
         console.log('No posts array found');
         setPosts([]);
       }
-      
+
     } catch (error) {
       console.error('Error:', error);
       setPosts([]);
@@ -71,7 +71,7 @@ function Sukien() {
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       {/* Header */}
       <div className="max-w-7xl mx-auto mb-8">
-        <h1 className="text-4xl font-bold text-center mb-2">🎉 Sự Kiện</h1>
+        <h1 className="text-4xl font-bold text-center mb-2"> Sự Kiện</h1>
         <p className="text-center text-gray-600">Cập nhật những sự kiện mới nhất</p>
       </div>
 
@@ -84,15 +84,15 @@ function Sukien() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts && posts.length > 0 ? (
           posts.map((post) => (
-            <div 
-              key={post.id} 
+            <div
+              key={post.id}
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
               onClick={() => setSelectedPost(post)}
             >
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={post.url_anh || '/placeholder.jpg'} 
+                <img
+                  src={post.url_anh || '/placeholder.jpg'}
                   alt={post.title}
                   className="w-full h-80 object-cover object-top rounded-lg mb-6"
                 />
@@ -136,16 +136,16 @@ function Sukien() {
 
       {/* Modal Chi Tiết */}
       {selectedPost && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedPost(null)}
         >
-          <div 
+          <div
             className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
             onClick={e => e.stopPropagation()}
           >
             {/* Close Button */}
-            <button 
+            <button
               className="absolute top-4 right-4 text-3xl text-gray-500 hover:text-gray-700 z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center"
               onClick={() => setSelectedPost(null)}
             >
@@ -155,8 +155,8 @@ function Sukien() {
             {/* Modal Content */}
             <div className="p-6">
               {/* Image */}
-              <img 
-                src={selectedPost.url_anh || '/placeholder.jpg'} 
+              <img
+                src={selectedPost.url_anh || '/placeholder.jpg'}
                 alt={selectedPost.title}
                 className="w-full h-80 object-cover object-top rounded-lg mb-6"
               />
