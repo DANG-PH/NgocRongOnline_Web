@@ -2,46 +2,55 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../src/redux/store";
+import { fetchProfileStart } from "../../src/redux/profile/profileSlice";
 
 
 export default function Navbar() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  
+  const dispatch = useDispatch();
+  const { data } = useSelector((state: RootState) => state.profile);
+
+  useEffect(() => {
+    dispatch(fetchProfileStart());
+  }, [dispatch]);
+
   const navItems = [
     { href: "/", label: "TRANG CHỦ" },
     { href: "/sukien", label: "SỰ KIỆN" },
     // { href: "/diendan", label: "DIỄN ĐÀN" },
     { href: "/shopacc", label: "SHOP ACC" },
     { href: "/bangxh", label: "BẢNG XH" },
-    { href: "/user", label: "USER" },
+    { href: data ? "/user" : "/login", label: data?.username || (data ? "TÀI KHOẢN" : "ĐĂNG NHẬP") },
   ]
-  
+
   return (
     <nav className="bg-[#FFC000] shadow-xl sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          <Image 
-                src="/assets/icon1.png"
-                alt="Logo NR Online"
-                width={100} 
-                height={100}
-                className="w-20 h-20"  
-            />
-            
-        
+          <Image
+            src="/assets/icon1.png"
+            alt="Logo NR Online"
+            width={100}
+            height={100}
+            className="w-20 h-20"
+          />
+
+
           <ul className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => (
               <li key={item.href}>
-                <Link 
+                <Link
                   href={item.href}
                   className={`
                     relative px-5 py-2 font-bold text-sm tracking-wide
                     transition-all duration-300 rounded-lg
-                    ${pathname === item.href 
-                      ? "text-red-600 bg-white shadow-md" 
+                    ${pathname === item.href
+                      ? "text-red-600 bg-white shadow-md"
                       : "text-white hover:bg-yellow-400 hover:text-red-600"
                     }
                   `}
@@ -54,9 +63,9 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          
-         {/* < 768px */}
-          <button 
+
+          {/* < 768px */}
+          <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden text-white p-2 hover:bg-yellow-400 rounded-lg transition"
           >
@@ -69,20 +78,20 @@ export default function Navbar() {
             </svg>
           </button>
         </div>
-        
+
         {/* < 768px */}
         {isMenuOpen && (
           <div className="md:hidden pb-4">
             <ul className="space-y-2">
               {navItems.map((item) => (
                 <li key={item.href}>
-                  <Link 
+                  <Link
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
                     className={`
                       block px-4 py-3 font-bold text-sm rounded-lg transition
-                      ${pathname === item.href 
-                        ? "text-red-600 bg-white shadow-md" 
+                      ${pathname === item.href
+                        ? "text-red-600 bg-white shadow-md"
                         : "text-white hover:bg-yellow-400 hover:text-red-600"
                       }
                     `}

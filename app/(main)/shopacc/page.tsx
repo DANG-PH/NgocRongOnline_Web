@@ -53,9 +53,9 @@ function ShopAcc() {
       }
 
       const data = await response.json();
-      
+
       let accountsList: Account[] = [];
-      
+
       if (Array.isArray(data)) {
         accountsList = data;
       } else if (data.accounts && Array.isArray(data.accounts)) {
@@ -66,7 +66,7 @@ function ShopAcc() {
         console.error('Unexpected data structure:', data);
         throw new Error('Dữ liệu từ server không đúng định dạng');
       }
-      
+
       const activeAccounts = accountsList.filter((acc: Account) => acc.status === 'ACTIVE');
       setAccounts(activeAccounts);
     } catch (error: any) {
@@ -308,11 +308,10 @@ function ShopAcc() {
                 <button
                   onClick={handleBuyAccount}
                   disabled={purchasing === selectedAccount.id}
-                  className={`w-full py-4 rounded-lg font-semibold text-lg transition-colors ${
-                    purchasing === selectedAccount.id
+                  className={`w-full py-4 rounded-lg font-semibold text-lg transition-colors ${purchasing === selectedAccount.id
                       ? 'bg-gray-400 cursor-not-allowed text-white'
                       : 'bg-green-600 hover:bg-green-700 text-white'
-                  }`}
+                    }`}
                 >
                   {purchasing === selectedAccount.id ? (
                     <span className="flex items-center justify-center">
@@ -342,7 +341,7 @@ function ShopAcc() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Mua Account Thành Công! 🎉</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Mua Account Thành Công! </h2>
                 <p className="text-gray-600">Thông tin đăng nhập của bạn:</p>
               </div>
 

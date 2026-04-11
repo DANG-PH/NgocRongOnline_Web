@@ -8,6 +8,7 @@ interface FormData {
   confirmPassword: string;
   realname: string;
   email: string;
+  gameName: string;
 }
 
 interface FormErrors {
@@ -16,6 +17,7 @@ interface FormErrors {
   confirmPassword?: string;
   realname?: string;
   email?: string;
+  gameName?: string;
 }
 
 function Register() {
@@ -25,9 +27,10 @@ function Register() {
     password: '',
     confirmPassword: '',
     realname: '',
-    email: ''
+    email: '',
+    gameName: ''
   });
-  
+
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<FormErrors>({});
 
@@ -37,7 +40,7 @@ function Register() {
       ...prev,
       [name]: value
     }));
-    
+
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({
         ...prev,
@@ -48,9 +51,9 @@ function Register() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     setLoading(true);
-    
+
     try {
       // Gọi Next.js API route
       const response = await fetch('/api/register', {
@@ -62,14 +65,16 @@ function Register() {
           username: formData.username,
           realname: formData.realname,
           password: formData.password,
-          email: formData.email
+          email: formData.email,
+          gameName: formData.gameName
+
         })
       });
 
       const data = await response.json();
 
       console.log('Register response:', data);
-      
+
       if (response.ok) {
         alert('Đăng ký thành công!');
         setFormData({
@@ -77,7 +82,8 @@ function Register() {
           password: '',
           confirmPassword: '',
           realname: '',
-          email: ''
+          email: '',
+          gameName: ''
         });
         router.push("/login");
       } else {
@@ -117,11 +123,10 @@ function Register() {
               onChange={handleInputChange}
               disabled={loading}
               required
-              className={`w-full h-14 px-4 pl-12 bg-white/[0.08] border rounded-2xl text-white text-base leading-6 transition-all duration-300 box-border placeholder:text-white/50 focus:outline-none focus:border-emerald-500 focus:bg-white/[0.12] focus:shadow-[0_0_20px_rgba(16,185,129,0.3),0_0_40px_rgba(16,185,129,0.09),0_0_80px_rgba(16,185,129,0.03)] disabled:opacity-60 disabled:cursor-not-allowed ${
-                errors.username 
-                  ? 'border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.3),0_0_40px_rgba(220,38,38,0.09),0_0_80px_rgba(220,38,38,0.03)]' 
+              className={`w-full h-14 px-4 pl-12 bg-white/[0.08] border rounded-2xl text-white text-base leading-6 transition-all duration-300 box-border placeholder:text-white/50 focus:outline-none focus:border-emerald-500 focus:bg-white/[0.12] focus:shadow-[0_0_20px_rgba(16,185,129,0.3),0_0_40px_rgba(16,185,129,0.09),0_0_80px_rgba(16,185,129,0.03)] disabled:opacity-60 disabled:cursor-not-allowed ${errors.username
+                  ? 'border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.3),0_0_40px_rgba(220,38,38,0.09),0_0_80px_rgba(220,38,38,0.03)]'
                   : 'border-white/20'
-              }`}
+                }`}
               style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
             />
             {errors.username && (
@@ -138,17 +143,42 @@ function Register() {
             </div>
             <input
               type="text"
+              name="gameName"
+              placeholder="Nhập tên nhân vật"
+              value={formData.gameName}
+              onChange={handleInputChange}
+              disabled={loading}
+              required
+              className={`w-full h-14 px-4 pl-12 bg-white/[0.08] border rounded-2xl text-white text-base leading-6 transition-all duration-300 box-border placeholder:text-white/50 focus:outline-none focus:border-emerald-500 focus:bg-white/[0.12] focus:shadow-[0_0_20px_rgba(16,185,129,0.3),0_0_40px_rgba(16,185,129,0.09),0_0_80px_rgba(16,185,129,0.03)] disabled:opacity-60 disabled:cursor-not-allowed ${errors.gameName
+                  ? 'border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.3),0_0_40px_rgba(220,38,38,0.09),0_0_80px_rgba(220,38,38,0.03)]'
+                  : 'border-white/20'
+                }`}
+              style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
+            />
+            {errors.gameName && (
+              <p className="mt-2 text-red-600 text-sm font-medium" style={{ textShadow: '0 0 10px rgba(220, 38, 38, 0.5)' }}>
+                {errors.gameName}
+              </p>
+            )}
+          </div>
+
+          {/* Game Name Input */}
+          <div className="relative">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 z-[2] pointer-events-none">
+              <i className="text-xl text-white/60 transition-all duration-300">📝</i>
+            </div>
+            <input
+              type="text"
               name="realname"
               placeholder="Nhập tên thật"
               value={formData.realname}
               onChange={handleInputChange}
               disabled={loading}
               required
-              className={`w-full h-14 px-4 pl-12 bg-white/[0.08] border rounded-2xl text-white text-base leading-6 transition-all duration-300 box-border placeholder:text-white/50 focus:outline-none focus:border-emerald-500 focus:bg-white/[0.12] focus:shadow-[0_0_20px_rgba(16,185,129,0.3),0_0_40px_rgba(16,185,129,0.09),0_0_80px_rgba(16,185,129,0.03)] disabled:opacity-60 disabled:cursor-not-allowed ${
-                errors.realname 
-                  ? 'border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.3),0_0_40px_rgba(220,38,38,0.09),0_0_80px_rgba(220,38,38,0.03)]' 
+              className={`w-full h-14 px-4 pl-12 bg-white/[0.08] border rounded-2xl text-white text-base leading-6 transition-all duration-300 box-border placeholder:text-white/50 focus:outline-none focus:border-emerald-500 focus:bg-white/[0.12] focus:shadow-[0_0_20px_rgba(16,185,129,0.3),0_0_40px_rgba(16,185,129,0.09),0_0_80px_rgba(16,185,129,0.03)] disabled:opacity-60 disabled:cursor-not-allowed ${errors.realname
+                  ? 'border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.3),0_0_40px_rgba(220,38,38,0.09),0_0_80px_rgba(220,38,38,0.03)]'
                   : 'border-white/20'
-              }`}
+                }`}
               style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
             />
             {errors.realname && (
@@ -171,11 +201,10 @@ function Register() {
               onChange={handleInputChange}
               disabled={loading}
               required
-              className={`w-full h-14 px-4 pl-12 bg-white/[0.08] border rounded-2xl text-white text-base leading-6 transition-all duration-300 box-border placeholder:text-white/50 focus:outline-none focus:border-emerald-500 focus:bg-white/[0.12] focus:shadow-[0_0_20px_rgba(16,185,129,0.3),0_0_40px_rgba(16,185,129,0.09),0_0_80px_rgba(16,185,129,0.03)] disabled:opacity-60 disabled:cursor-not-allowed ${
-                errors.email 
-                  ? 'border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.3),0_0_40px_rgba(220,38,38,0.09),0_0_80px_rgba(220,38,38,0.03)]' 
+              className={`w-full h-14 px-4 pl-12 bg-white/[0.08] border rounded-2xl text-white text-base leading-6 transition-all duration-300 box-border placeholder:text-white/50 focus:outline-none focus:border-emerald-500 focus:bg-white/[0.12] focus:shadow-[0_0_20px_rgba(16,185,129,0.3),0_0_40px_rgba(16,185,129,0.09),0_0_80px_rgba(16,185,129,0.03)] disabled:opacity-60 disabled:cursor-not-allowed ${errors.email
+                  ? 'border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.3),0_0_40px_rgba(220,38,38,0.09),0_0_80px_rgba(220,38,38,0.03)]'
                   : 'border-white/20'
-              }`}
+                }`}
               style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
             />
             {errors.email && (
@@ -198,11 +227,10 @@ function Register() {
               onChange={handleInputChange}
               disabled={loading}
               required
-              className={`w-full h-14 px-4 pl-12 bg-white/[0.08] border rounded-2xl text-white text-base leading-6 transition-all duration-300 box-border placeholder:text-white/50 focus:outline-none focus:border-emerald-500 focus:bg-white/[0.12] focus:shadow-[0_0_20px_rgba(16,185,129,0.3),0_0_40px_rgba(16,185,129,0.09),0_0_80px_rgba(16,185,129,0.03)] disabled:opacity-60 disabled:cursor-not-allowed ${
-                errors.password 
-                  ? 'border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.3),0_0_40px_rgba(220,38,38,0.09),0_0_80px_rgba(220,38,38,0.03)]' 
+              className={`w-full h-14 px-4 pl-12 bg-white/[0.08] border rounded-2xl text-white text-base leading-6 transition-all duration-300 box-border placeholder:text-white/50 focus:outline-none focus:border-emerald-500 focus:bg-white/[0.12] focus:shadow-[0_0_20px_rgba(16,185,129,0.3),0_0_40px_rgba(16,185,129,0.09),0_0_80px_rgba(16,185,129,0.03)] disabled:opacity-60 disabled:cursor-not-allowed ${errors.password
+                  ? 'border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.3),0_0_40px_rgba(220,38,38,0.09),0_0_80px_rgba(220,38,38,0.03)]'
                   : 'border-white/20'
-              }`}
+                }`}
               style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
             />
             {errors.password && (
@@ -225,11 +253,10 @@ function Register() {
               onChange={handleInputChange}
               disabled={loading}
               required
-              className={`w-full h-14 px-4 pl-12 bg-white/[0.08] border rounded-2xl text-white text-base leading-6 transition-all duration-300 box-border placeholder:text-white/50 focus:outline-none focus:border-emerald-500 focus:bg-white/[0.12] focus:shadow-[0_0_20px_rgba(16,185,129,0.3),0_0_40px_rgba(16,185,129,0.09),0_0_80px_rgba(16,185,129,0.03)] disabled:opacity-60 disabled:cursor-not-allowed ${
-                errors.confirmPassword 
-                  ? 'border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.3),0_0_40px_rgba(220,38,38,0.09),0_0_80px_rgba(220,38,38,0.03)]' 
+              className={`w-full h-14 px-4 pl-12 bg-white/[0.08] border rounded-2xl text-white text-base leading-6 transition-all duration-300 box-border placeholder:text-white/50 focus:outline-none focus:border-emerald-500 focus:bg-white/[0.12] focus:shadow-[0_0_20px_rgba(16,185,129,0.3),0_0_40px_rgba(16,185,129,0.09),0_0_80px_rgba(16,185,129,0.03)] disabled:opacity-60 disabled:cursor-not-allowed ${errors.confirmPassword
+                  ? 'border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.3),0_0_40px_rgba(220,38,38,0.09),0_0_80px_rgba(220,38,38,0.03)]'
                   : 'border-white/20'
-              }`}
+                }`}
               style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
             />
             {errors.confirmPassword && (
@@ -240,12 +267,11 @@ function Register() {
           </div>
 
           {/* Submit Button */}
-          <button 
-            type="submit" 
-            disabled={loading} 
-            className={`w-full px-4 py-4 sm:py-[14px] bg-gradient-to-br from-emerald-500 to-cyan-500 border-none rounded-2xl text-white text-[1.1rem] sm:text-base font-bold cursor-pointer flex items-center justify-center gap-2 transition-all duration-[400ms] relative overflow-hidden hover:translate-y-[-2px] hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(16,185,129,0.6),0_0_40px_rgba(16,185,129,0.18),0_0_80px_rgba(16,185,129,0.06)] active:translate-y-0 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:!transform-none ${
-              loading ? 'pointer-events-none' : ''
-            }`}
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full px-4 py-4 sm:py-[14px] bg-gradient-to-br from-emerald-500 to-cyan-500 border-none rounded-2xl text-white text-[1.1rem] sm:text-base font-bold cursor-pointer flex items-center justify-center gap-2 transition-all duration-[400ms] relative overflow-hidden hover:translate-y-[-2px] hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(16,185,129,0.6),0_0_40px_rgba(16,185,129,0.18),0_0_80px_rgba(16,185,129,0.06)] active:translate-y-0 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:!transform-none ${loading ? 'pointer-events-none' : ''
+              }`}
             style={{ transitionTimingFunction: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)' }}
           >
             {loading ? (
@@ -260,8 +286,8 @@ function Register() {
         {/* Login Link */}
         <div className="mt-5 text-center text-white/80 text-[0.95rem]">
           <span>Đã có tài khoản? </span>
-          <button 
-            onClick={() => router.push("/login")} 
+          <button
+            onClick={() => router.push("/login")}
             className="ml-5 bg-transparent border-none text-cyan-500 font-bold cursor-pointer underline underline-offset-4 transition-all duration-300 hover:text-emerald-500 hover:shadow-[0_0_10px_rgba(16,185,129,0.5)] hover:scale-105"
             style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
           >
@@ -271,8 +297,8 @@ function Register() {
 
         {/* Home Link */}
         <div className="text-center">
-          <button 
-            onClick={() => router.push("/")} 
+          <button
+            onClick={() => router.push("/")}
             className="bg-transparent border-none text-white/60 text-sm cursor-pointer flex items-center justify-center gap-1 mx-auto px-4 py-2 rounded-xl transition-all duration-300 hover:text-white/90 hover:bg-white/5 hover:-translate-x-1"
             style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
           >
