@@ -68,6 +68,12 @@ export default function User() {
     dispatch(fetchProfileStart());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (!loading && (error || !user)) {
+      router.push("/login");
+    }
+  }, [loading, error, user, router]);
+
   const formatNumber = (value: any): number => {
     if (typeof value === 'number') return value;
     if (value && typeof value === 'object' && 'low' in value) {
@@ -90,9 +96,6 @@ export default function User() {
     );
 
   if (error || !user) {
-    if (typeof window !== 'undefined') {
-      router.push("/login");
-    }
     return null;
   }
 

@@ -8,7 +8,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      <body>
+      <body suppressHydrationWarning>
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
