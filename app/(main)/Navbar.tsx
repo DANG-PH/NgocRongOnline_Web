@@ -14,10 +14,20 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const dispatch = useDispatch();
   const { data } = useSelector((state: RootState) => state.profile);
+  const [localUser, setLocalUser] = useState<any>(null);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("currentUser");
+      if (stored) {
+        setLocalUser(JSON.parse(stored));
+      }
+    }
     dispatch(fetchProfileStart());
   }, [dispatch]);
+
+  const displayHref = data || localUser ? "/user" : "/login";
+  const displayLabel = data?.username || localUser?.username || (localUser ? "TÀI KHOẢN" : "ĐĂNG NHẬP");
 
   const navItems = [
     { href: "/", label: "TRANG CHỦ" },
@@ -25,7 +35,7 @@ export default function Navbar() {
     // { href: "/diendan", label: "DIỄN ĐÀN" },
     { href: "/shopacc", label: "SHOP ACC" },
     { href: "/bangxh", label: "BẢNG XH" },
-    { href: data ? "/user" : "/login", label: data?.username || (data ? "TÀI KHOẢN" : "ĐĂNG NHẬP") },
+    { href: displayHref, label: displayLabel },
   ]
 
   return (

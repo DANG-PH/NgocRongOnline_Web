@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export interface Post {
   id: number;
@@ -16,7 +17,8 @@ export interface Post {
 function Sukien() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [isLogged, setIsLogged] = useState<boolean>(true);
+  const router = useRouter();
 
   useEffect(() => {
     fetchPosts();
@@ -26,10 +28,11 @@ function Sukien() {
     try {
       const stored = localStorage.getItem("currentUser");
       if (!stored) {
-        alert('Vui lòng đăng nhập!');
+        setIsLogged(false);
         setLoading(false);
         return;
       }
+      setIsLogged(true);
 
       const userData = JSON.parse(stored);
       const response = await fetch('/api/all-posts', {
@@ -59,7 +62,7 @@ function Sukien() {
 
   if (loading)
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 bg-no-repeat bg-center bg-fixed bg-cover" style={{ backgroundImage: "url('/assets/br.jpg')" }}>
         <div className="text-center">
           <div className="animate-spin h-16 w-16 border-b-2 border-blue-500 mx-auto rounded-full"></div>
           <p className="mt-4 text-gray-600">Đang tải thông tin...</p>
@@ -68,26 +71,32 @@ function Sukien() {
     );
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 py-8 px-4 bg-no-repeat bg-center bg-fixed bg-cover" style={{ backgroundImage: "url('/assets/br.jpg')" }}>
       {/* Header */}
-      <div className="max-w-7xl mx-auto mb-8">
-        <h1 className="text-4xl font-bold text-center mb-2"> Sự Kiện</h1>
-        <p className="text-center text-gray-600">Cập nhật những sự kiện mới nhất</p>
+      <div className="max-w-7xl mx-auto mb-8 pt-4">
+        <h1 className="text-5xl font-black text-center mb-3 text-transparent bg-clip-text bg-gradient-to-b from-yellow-300 to-yellow-600 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" style={{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))' }}>Sự Kiện</h1>
+        <p className="text-center text-gray-100 font-semibold text-lg drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Cập nhật những sự kiện mới nhất</p>
       </div>
 
       {/* Debug Info */}
-      <div className="max-w-7xl mx-auto mb-4">
-        <p className="text-sm text-gray-500">Số sự kiện: {posts?.length || 0}</p>
-      </div>
+      {isLogged && (
+        <div className="max-w-7xl mx-auto mb-4">
+          <p className="text-sm font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Số sự kiện: {posts?.length || 0}</p>
+        </div>
+      )}
 
       {/* Posts Grid */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {posts && posts.length > 0 ? (
+        {!isLogged ? (
+          <div className="col-span-full text-center py-20 bg-black/50 backdrop-blur-sm rounded-2xl border border-white/10 shadow-xl">
+            <h2 className="text-3xl font-bold text-white mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Vui lòng đăng nhập!</h2>
+          </div>
+        ) : posts && posts.length > 0 ? (
           posts.map((post) => (
             <div
               key={post.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-              onClick={() => setSelectedPost(post)}
+              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer flex flex-col h-full"
+              onClick={() => router.push(`/sukien/${post.id}`)}
             >
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
@@ -128,77 +137,12 @@ function Sukien() {
             </div>
           ))
         ) : (
-          <div className="col-span-full text-center py-20">
-            <p className="text-gray-500 text-xl">📭 Chưa có sự kiện nào</p>
+          <div className="col-span-full text-center py-20 bg-black/50 backdrop-blur-sm rounded-2xl border border-white/10 shadow-xl">
+            <p className="text-white text-2xl font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">📭 Chưa có sự kiện nào</p>
           </div>
         )}
       </div>
 
-      {/* Modal Chi Tiết */}
-      {selectedPost && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
-          onClick={() => setSelectedPost(null)}
-        >
-          <div
-            className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
-            onClick={e => e.stopPropagation()}
-          >
-            {/* Close Button */}
-            <button
-              className="absolute top-4 right-4 text-3xl text-gray-500 hover:text-gray-700 z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center"
-              onClick={() => setSelectedPost(null)}
-            >
-              ✕
-            </button>
-
-            {/* Modal Content */}
-            <div className="p-6">
-              {/* Image */}
-              <img
-                src={selectedPost.url_anh || '/placeholder.jpg'}
-                alt={selectedPost.title}
-                className="w-full h-80 object-cover object-top rounded-lg mb-6"
-              />
-
-              {/* Title */}
-              <h2 className="text-3xl font-bold mb-4">{selectedPost.title}</h2>
-
-              {/* Content */}
-              <div className="prose max-w-none mb-6">
-                <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                  {selectedPost.content}
-                </p>
-              </div>
-
-              {/* Footer */}
-              <div className="flex items-center justify-between pt-6 border-t border-gray-200">
-                <span className="flex items-center gap-2 text-gray-600">
-                  <span>✍️</span>
-                  <span className="font-medium">{selectedPost.editor_realname}</span>
-                </span>
-                <span className="flex items-center gap-2 text-gray-600">
-                  <span>📅</span>
-                  <span>
-                    {selectedPost.create_at ? new Date(selectedPost.create_at).toLocaleDateString('vi-VN', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    }) : 'N/A'}
-                  </span>
-                </span>
-              </div>
-
-              {/* Status */}
-              {selectedPost.status && (
-                <div className="mt-4 inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full">
-                  {selectedPost.status}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
