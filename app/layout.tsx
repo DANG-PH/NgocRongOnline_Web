@@ -2,6 +2,7 @@ import './globals.css'
 import ReduxProvider from "./Provider";
 
 export const metadata = {
+  metadataBase: new URL("https://ngocrongdark.com"),
   title: {
     default: "Ngọc Rồng Dark",
     template: "%s | Ngọc Rồng Dark",
@@ -48,7 +49,7 @@ export const metadata = {
   },
 
   icons: {
-    icon: "/assets/avt3.webp",
+    icon: "https://i.redd.it/tnpjnvyab2z31.png",
   },
 
   robots: {
