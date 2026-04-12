@@ -3,57 +3,80 @@
 function HomePage() {
   return (
     <div className="min-h-screen relative">
-      {/* Video Background */}
-      <div className="fixed inset-0 overflow-hidden -z-10">
+    {/* Background */}
+    <div className="fixed inset-0 overflow-hidden -z-10">
+
+      {/* ===== Desktop: Video ===== */}
+      <div className="hidden md:block">
         <video 
           autoPlay 
           muted 
           loop 
           playsInline 
-          preload="metadata"
-          poster="/assets/head1.webp"
           className="absolute w-full h-[120%] object-cover brightness-90"
           style={{ animation: 'vid1 10s infinite' }}
         >
-          <source src="/assets/head1.webm" type="video/webm" />
-          <source src="/assets/head1.mp4" type="video/mp4" />
+          <source src="/assets/head1.mp4" />
         </video>
-        
+
         <video 
           autoPlay 
           muted 
           loop 
           playsInline 
-          preload="metadata"
-          poster="/assets/head2.webp"
           className="absolute w-full h-full object-cover brightness-90"
           style={{ animation: 'vid2 10s infinite' }}
         >
-          <source src="/assets/head2.webm" type="video/webm" />
-          <source src="/assets/head2.mp4" type="video/mp4" />
+          <source src="/assets/head2.mp4" />
         </video>
       </div>
+
+      {/* ===== Mobile: Image ===== */}
+      <div className="block md:hidden">
+        <img 
+          src="/assets/mobile1.jpg" 
+          className="absolute w-full h-full object-cover"
+          style={{ animation: 'img1 10s infinite' }}
+        />
+        <img 
+          src="/assets/mobile2.jpg" 
+          className="absolute w-full h-full object-cover"
+          style={{ animation: 'img2 10s infinite' }}
+        />
+      </div>
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40 md:bg-black/40"></div>
+    </div>
 
       {/* Content */}
       <div className="relative z-10">
         <div className="relative h-96 overflow-hidden mb-10">
           <div className="relative w-full h-full flex items-center justify-center">
-            
-           
-            
             <div className="relative z-20 text-center text-white">
               <div className="mb-5">
-                <h1 className="text-5xl font-black m-0 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent drop-shadow-lg animate-pulse">
-                  DRAGON BALL LEGENDS
+                <h1
+                  className="text-5xl font-black m-0 bg-gradient-to-r from-yellow-400 via-orange-500 brightness-125 to-red-500 bg-clip-text text-transparent animate-pulse"
+                  style={{
+                    filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.9)) drop-shadow(0 0px 16px rgba(0,0,0,0.7))'
+                  }}
+                >
+                  NGỌC RỒNG DARK
                 </h1>
                 <div className="w-48 h-1 bg-gradient-to-r from-yellow-400 via-red-500 to-yellow-400 mx-auto mt-3 rounded animate-pulse"></div>
               </div>
               
               <div className="text-white">
-                <p className="text-lg my-2 drop-shadow-md">
+                <p
+                  className="text-lg my-2"
+                  style={{ textShadow: '0 2px 8px rgba(0,0,0,0.95), 0 1px 3px rgba(0,0,0,0.8)' }}
+                >
                   Trải nghiệm trận chiến Dragon Ball cực kỳ mãn nhãn
                 </p>
-                <p className="text-lg my-2 drop-shadow-md">
+                <p
+                  className="text-lg my-2"
+                  style={{ textShadow: '0 2px 8px rgba(0,0,0,0.95), 0 1px 3px rgba(0,0,0,0.8)' }}
+                >
                   Với đồ họa tuyệt đẹp và gameplay hấp dẫn
                 </p>
               </div>
@@ -64,7 +87,11 @@ function HomePage() {
         <div className="px-5">
           <div className="text-center mb-10">
             <div className="inline-block bg-gradient-to-br from-yellow-400 to-orange-500 text-white py-4 px-10 rounded-full text-2xl font-bold uppercase tracking-wider shadow-lg shadow-yellow-500/30 relative">
-              <span><a href="https://github.com/DANG-PH/NgocRongOnline/releases/download/v1.0.0/NRO_HDG.zip">TẢI GAME</a></span>
+              <span
+                style={{ textShadow: '0 2px 6px rgba(0,0,0,0.5)' }}
+              >
+                <a href="https://github.com/DANG-PH/NgocRongOnline/releases/download/v1.0.0/NRO_HDG.zip">TẢI GAME</a>
+              </span>
               <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 via-red-500 to-yellow-400 rounded-full -z-10 animate-pulse opacity-80"></div>
             </div>
           </div>
@@ -79,8 +106,14 @@ function HomePage() {
                 </div>
                 <div className="flex-1">
                   <a href="https://github.com/DANG-PH/NgocRongOnline/releases/download/v1.0.0/NRO_HDG.zip">
-                    <div className="text-xs opacity-80 mb-1">Tải cho</div>
-                    <div className="text-lg font-bold">Windows</div>
+                    <div
+                      className="text-xs opacity-80 mb-1"
+                      style={{ textShadow: '0 1px 4px rgba(0,0,0,0.6)' }}
+                    >Tải cho</div>
+                    <div
+                      className="text-lg font-bold"
+                      style={{ textShadow: '0 2px 6px rgba(0,0,0,0.6)' }}
+                    >Windows</div>
                   </a>
                 </div>
               </div>
@@ -94,8 +127,14 @@ function HomePage() {
                   </svg>
                 </div>
                 <div className="flex-1">
-                  <div className="text-xs opacity-80 mb-1">Tải game</div>
-                  <div className="text-lg font-bold">App Store</div>
+                  <div
+                    className="text-xs opacity-80 mb-1"
+                    style={{ textShadow: '0 1px 4px rgba(0,0,0,0.6)' }}
+                  >Tải game</div>
+                  <div
+                    className="text-lg font-bold"
+                    style={{ textShadow: '0 2px 6px rgba(0,0,0,0.6)' }}
+                  >App Store</div>
                 </div>
               </div>
             </div>
@@ -108,8 +147,14 @@ function HomePage() {
                   </svg>
                 </div>
                 <div className="flex-1">
-                  <div className="text-xs opacity-80 mb-1">Tải game</div>
-                  <div className="text-lg font-bold">Google Play</div>
+                  <div
+                    className="text-xs opacity-80 mb-1"
+                    style={{ textShadow: '0 1px 4px rgba(0,0,0,0.6)' }}
+                  >Tải game</div>
+                  <div
+                    className="text-lg font-bold"
+                    style={{ textShadow: '0 2px 6px rgba(0,0,0,0.6)' }}
+                  >Google Play</div>
                 </div>
               </div>
             </div>
@@ -118,7 +163,6 @@ function HomePage() {
       </div>
 
       <style jsx>{`
-
         @keyframes vid1 {
           0% { opacity: 1; }
           33% { opacity: 0; }
@@ -132,7 +176,18 @@ function HomePage() {
           66% { opacity: 1; }
           100% { opacity: 0; }
         }
-        
+
+        @keyframes img1 {
+          0% { opacity: 1; }
+          50% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+
+        @keyframes img2 {
+          0% { opacity: 0; }
+          50% { opacity: 1; }
+          100% { opacity: 0; }
+        }
       `}</style>
     </div>
   );
