@@ -1,56 +1,40 @@
 "use client"
 
+
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../src/redux/store";
-import { fetchProfileStart } from "../../src/redux/profile/profileSlice";
+
+
 
 
 export default function Navbar() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const dispatch = useDispatch();
-  const { data } = useSelector((state: RootState) => state.profile);
-  const [localUser, setLocalUser] = useState<any>(null);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("currentUser");
-      if (stored) {
-        setLocalUser(JSON.parse(stored));
-      }
-    }
-    dispatch(fetchProfileStart());
-  }, [dispatch]);
-
-  const displayHref = data || localUser ? "/user" : "/login";
-  const displayLabel = data?.username || localUser?.username || (localUser ? "TÀI KHOẢN" : "ĐĂNG NHẬP");
-
+ 
   const navItems = [
     { href: "/", label: "TRANG CHỦ" },
     { href: "/sukien", label: "SỰ KIỆN" },
     // { href: "/diendan", label: "DIỄN ĐÀN" },
     { href: "/shopacc", label: "SHOP ACC" },
     { href: "/bangxh", label: "BẢNG XH" },
-    { href: displayHref, label: displayLabel },
+    { href: "/user", label: "USER" },
   ]
-
+ 
   return (
     <nav className="bg-[#FFC000] shadow-xl sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <Image
-            src="/assets/icon1.png"
-            alt="Logo NR Online"
-            width={100}
-            height={100}
-            className="w-20 h-20"
-          />
-
-
+                src="/assets/icon1.png"
+                alt="Logo NR Online"
+                width={100}
+                height={100}
+                className="w-20 h-20"  
+            />
+           
+       
           <ul className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => (
               <li key={item.href}>
@@ -73,8 +57,8 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-
-          {/* < 768px */}
+         
+         {/* < 768px */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden text-white p-2 hover:bg-yellow-400 rounded-lg transition"
@@ -88,7 +72,7 @@ export default function Navbar() {
             </svg>
           </button>
         </div>
-
+       
         {/* < 768px */}
         {isMenuOpen && (
           <div className="md:hidden pb-4">
@@ -117,3 +101,4 @@ export default function Navbar() {
     </nav>
   )
 }
+
