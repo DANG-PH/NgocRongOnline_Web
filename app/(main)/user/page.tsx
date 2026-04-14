@@ -88,18 +88,29 @@ export default function User() {
     return 0;
   };
 
-  if (loading)
+  const isRedirectingToLogin = hasRequestedProfile && !loading && (error || !user);
+
+  if (loading || isRedirectingToLogin)
     return (
       <div className="min-h-screen flex items-center justify-center  bg-no-repeat bg-center bg-fixed bg-cover" style={{ backgroundImage: "url('/assets/br.jpg')" }}>
         <div className="text-center">
           <div className="animate-spin h-16 w-16 border-b-2 border-blue-500 mx-auto rounded-full"></div>
-          <p className="mt-4 text-gray-600">Đang tải thông tin...</p>
+          <p className="mt-4 text-gray-200">
+            {isRedirectingToLogin ? "Đang chuyển đến trang đăng nhập..." : "Đang tải thông tin..."}
+          </p>
         </div>
       </div>
     );
 
-  if (error || !user) {
-    return null;
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center  bg-no-repeat bg-center bg-fixed bg-cover" style={{ backgroundImage: "url('/assets/br.jpg')" }}>
+        <div className="text-center">
+          <div className="animate-spin h-16 w-16 border-b-2 border-blue-500 mx-auto rounded-full"></div>
+          <p className="mt-4 text-gray-200">Đang tải thông tin...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -115,6 +126,12 @@ export default function User() {
           </div>
 
           <div className="flex flex-wrap gap-2 md:gap-3">
+            <button
+                onClick={() => router.push("/chat")}
+                className="bg-black/50 backdrop-blur-sm border border-white/20 text-gray-100 hover:bg-white/20 hover:text-white px-4 py-2 rounded shadow-[0_4px_6px_rgba(0,0,0,0.3)] text-sm font-medium transition-all hover:-translate-y-0.5"
+              >
+                Chatbox
+            </button>
             <button
               onClick={() => router.push("/acchistory")}
               className="bg-black/50 backdrop-blur-sm border border-white/20 text-gray-100 hover:bg-white/20 hover:text-white px-4 py-2 rounded shadow-[0_4px_6px_rgba(0,0,0,0.3)] text-sm font-medium transition-all hover:-translate-y-0.5"

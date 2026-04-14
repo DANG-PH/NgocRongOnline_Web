@@ -162,10 +162,11 @@ setLoading(false);
 
   if (loading)
     return (
-      <div className="min-h-screen flex items-center justify-center  bg-no-repeat bg-center bg-fixed bg-cover" style={{ backgroundImage: "url('/assets/br.jpg')" }}>
-        <div className="text-center">
+      <div className="min-h-screen flex items-center justify-center  bg-no-repeat bg-center bg-fixed bg-cover relative" style={{ backgroundImage: "url('/assets/br.jpg')" }}>
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+        <div className="text-center relative z-10">
           <div className="animate-spin h-16 w-16 border-b-2 border-blue-500 mx-auto rounded-full"></div>
-          <p className="mt-4 text-gray-600">Đang tải thông tin...</p>
+          <p className="mt-4 text-gray-200">Đang tải thông tin...</p>
         </div>
       </div>
     );
@@ -173,6 +174,7 @@ setLoading(false);
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative bg-cover bg-center" style={{ backgroundImage: "url('/assets/br.jpg')" }}>
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
       <div className="bg-white/[0.08] backdrop-blur-2xl border border-white/15 shadow-[0_8px_32px_rgba(124,58,237,0.3)] rounded-3xl p-8 w-full max-w-[420px] relative z-10 hover:shadow-[0_0_20px_rgba(124,58,237,0.4),0_0_40px_rgba(124,58,237,0.12),0_0_80px_rgba(124,58,237,0.04)] sm:p-6 sm:mx-4" style={{ transitionTimingFunction: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)' }}>
 
 

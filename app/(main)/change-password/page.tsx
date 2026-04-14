@@ -106,12 +106,16 @@ export default function ChangePassword() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div
+      className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-no-repeat bg-center bg-fixed bg-cover relative"
+      style={{ backgroundImage: "url('/assets/br.jpg')" }}
+    >
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+      <div className="max-w-md w-full space-y-8 relative z-10">
         {/* Header */}
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900">Đổi Mật Khẩu</h2>
-          <p className="mt-2 text-gray-600">
+          <h2 className="text-3xl font-bold text-white">Đổi Mật Khẩu</h2>
+          <p className="mt-2 text-gray-200">
             Vui lòng nhập mật khẩu cũ và mật khẩu mới
           </p>
         </div>
@@ -131,12 +135,12 @@ export default function ChangePassword() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          <div className="bg-white shadow-md rounded-lg p-6 space-y-4">
+          <div className="bg-black/60 backdrop-blur-md border border-white/10 shadow-md rounded-lg p-6 space-y-4">
             {/* Old Password */}
             <div>
               <label
                 htmlFor="oldPassword"
-                className="block text-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-medium text-gray-200 mb-2"
               >
                 Mật khẩu cũ <span className="text-red-500">*</span>
               </label>
@@ -147,7 +151,7 @@ export default function ChangePassword() {
                 value={formData.oldPassword}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-white/20 bg-black/40 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Nhập mật khẩu cũ"
               />
             </div>
@@ -156,7 +160,7 @@ export default function ChangePassword() {
             <div>
               <label
                 htmlFor="newPassword"
-                className="block text-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-medium text-gray-200 mb-2"
               >
                 Mật khẩu mới <span className="text-red-500">*</span>
               </label>
@@ -167,7 +171,7 @@ export default function ChangePassword() {
                 value={formData.newPassword}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-white/20 bg-black/40 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Nhập mật khẩu mới (tối thiểu 6 ký tự)"
               />
             </div>
@@ -201,8 +205,8 @@ export default function ChangePassword() {
         </form>
 
         {/* Info */}
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-          <p className="text-sm text-yellow-800">
+        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+          <p className="text-sm text-yellow-200">
             <strong>Lưu ý:</strong> Sau khi đổi mật khẩu thành công, bạn sẽ cần
             đăng nhập lại với mật khẩu mới.
           </p>

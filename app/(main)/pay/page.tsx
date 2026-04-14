@@ -271,24 +271,8 @@ export default function Pay() {
             <h1 className="text-3xl sm:text-4xl font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] uppercase">
               Ví của tôi
             </h1>
-            {message && (
-              <p className="text-green-400 mt-2 text-lg drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] font-medium flex items-center gap-2">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                {message}
-              </p>
-            )}
           </div>
-          <button
-            onClick={() => {
-              fetchPayData();
-              fetchWithdrawHistory();
-            }}
-            className="bg-blue-600/80 backdrop-blur-md text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition font-semibold shadow-[0_0_15px_rgba(37,99,235,0.4)] flex items-center gap-2 uppercase tracking-wide cursor-pointer"
-          >
-            <span>🔄</span> Làm mới
-          </button>
+          
         </div>
 
         {/* Balance Card */}
@@ -300,9 +284,7 @@ export default function Pay() {
               {formatCurrency(payData.tien)}
             </p>
           </div>
-          <div className="text-6xl md:text-7xl opacity-80 drop-shadow-[0_0_15px_rgba(255,215,0,0.4)] relative z-10">
-            💰
-          </div>
+        
           <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl"></div>
         </div>
 
@@ -313,7 +295,6 @@ export default function Pay() {
             className="group relative bg-black/50 backdrop-blur-md border border-blue-500/50 hover:bg-black/70 hover:border-blue-400 transition-all py-6 px-6 rounded-2xl flex flex-col items-center justify-center gap-3 shadow-[0_4px_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)] overflow-hidden"
           >
             <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-blue-500/20 transition-all"></div>
-            <span className="text-4xl relative z-10 drop-shadow-md">📥</span>
             <span className="text-blue-400 font-black text-xl uppercase tracking-wider relative z-10">Nạp tiền</span>
           </button>
 
@@ -322,7 +303,6 @@ export default function Pay() {
             className="group relative bg-black/50 backdrop-blur-md border border-red-500/50 hover:bg-black/70 hover:border-red-400 transition-all py-6 px-6 rounded-2xl flex flex-col items-center justify-center gap-3 shadow-[0_4px_15px_rgba(239,68,68,0.2)] hover:shadow-[0_0_25px_rgba(239,68,68,0.4)] overflow-hidden"
           >
             <div className="absolute inset-0 bg-red-500/10 group-hover:bg-red-500/20 transition-all"></div>
-            <span className="text-4xl relative z-10 drop-shadow-md">📤</span>
             <span className="text-red-400 font-black text-xl uppercase tracking-wider relative z-10">Rút tiền</span>
           </button>
         </div>

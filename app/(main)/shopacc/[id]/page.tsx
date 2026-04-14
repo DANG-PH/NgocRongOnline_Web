@@ -253,7 +253,7 @@ export default function ShopAccDetail() {
               Đang xử lý...
             </span>
           ) : (
-            '🛒 Mua Account Này'
+            'Mua Account Này'
           )}
         </button>
       </div>

@@ -132,13 +132,17 @@ function Shop() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4">
-      <div className="max-w-7xl mx-auto">
+    <div
+      className="min-h-screen py-10 px-4 bg-no-repeat bg-center bg-fixed bg-cover relative"
+      style={{ backgroundImage: "url('/assets/br.jpg')" }}
+    >
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Back Button */}
         <div className="mb-6">
           <button
             onClick={() => router.push('/user')}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium transition-colors"
+            className="flex items-center gap-2 text-gray-200 hover:text-white font-medium transition-colors"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
@@ -149,10 +153,10 @@ function Shop() {
 
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-3">
+          <h1 className="text-4xl font-bold text-white mb-3">
             Shop Bán Vật Phẩm
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-200">
             Chọn và mua vật phẩm phù hợp với bạn
           </p>
         </div>
@@ -162,10 +166,10 @@ function Shop() {
           {items.map(item => (
             <div 
               key={item.id} 
-              className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              className="bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
             >
               {/* Image */}
-              <div className="relative aspect-square bg-gradient-to-br from-purple-100 to-blue-100 p-6">
+              <div className="relative aspect-square bg-gradient-to-br from-white/10 to-white/5 p-6">
                 <img 
                   src={item.image.src} 
                   alt={item.name}
@@ -174,18 +178,18 @@ function Shop() {
               </div>
 
               {/* Info */}
-              <div className="p-5 bg-white">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-white mb-2">
                   {item.name}
                 </h3>
                 
-                <p className="text-sm text-gray-600 mb-4 min-h-[40px]">
+                <p className="text-sm text-gray-300 mb-4 min-h-[40px]">
                   {item.description}
                 </p>
                 
                 {/* Price */}
                 <div className="mb-4">
-                  <p className="text-sm text-gray-500 mb-1">Giá</p>
+                  <p className="text-sm text-gray-400 mb-1">Giá</p>
                   <p className="text-2xl font-bold text-blue-600">
                     {formatPrice(item.price)}
                   </p>
@@ -218,8 +222,8 @@ function Shop() {
 
         {/* Footer Note */}
         <div className="mt-12 text-center">
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 max-w-2xl mx-auto">
-            <p className="text-gray-700 text-base">
+          <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-6 max-w-2xl mx-auto">
+            <p className="text-gray-200 text-base">
               ⚠️ <strong>Lưu ý:</strong> Vật phẩm sẽ được thêm vào tài khoản của bạn sau khi thanh toán. 
               Vào game để kiểm tra và sử dụng!
             </p>

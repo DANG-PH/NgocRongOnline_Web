@@ -53,7 +53,7 @@ function Otp() {
 
       localStorage.setItem("currentUser", JSON.stringify(userData));
       // await SaveRole();
-      router.push("/");
+      router.push("/user");
     } else {
       const message = Array.isArray(data.message)
         ? data.message.join(", ")

@@ -70,9 +70,13 @@ export default function ResetPassword() {
   }, [message]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="max-w-md w-full p-6 bg-white shadow rounded">
-        <h2 className="text-2xl font-bold text-center mb-4">
+    <div
+      className="min-h-screen flex items-center justify-center bg-no-repeat bg-center bg-fixed bg-cover relative p-4"
+      style={{ backgroundImage: "url('/assets/br.jpg')" }}
+    >
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+      <div className="max-w-md w-full p-6 bg-black/60 backdrop-blur-md border border-white/10 shadow rounded relative z-10">
+        <h2 className="text-2xl font-bold text-white text-center mb-4">
           {step === 1 ? "Quên mật khẩu" : "Đặt lại mật khẩu"}
         </h2>
 
@@ -96,7 +100,7 @@ export default function ResetPassword() {
               placeholder="Nhập username"
               value={localUsername}
               onChange={(e) => setLocalUsername(e.target.value)}
-              className="border p-3 w-full rounded mb-4"
+              className="border border-white/20 bg-black/40 text-white p-3 w-full rounded mb-4"
             />
 
             <button
@@ -113,7 +117,7 @@ export default function ResetPassword() {
               type="text"
               value={username}
               readOnly
-              className="border p-3 w-full rounded mb-4 bg-gray-100"
+              className="border border-white/20 p-3 w-full rounded mb-4 bg-black/30 text-gray-300"
             />
 
             <input
@@ -123,7 +127,7 @@ export default function ResetPassword() {
               onChange={(e) =>
                 setFormData({ ...formData, otp: e.target.value })
               }
-              className="border p-3 w-full rounded mb-4"
+              className="border border-white/20 bg-black/40 text-white p-3 w-full rounded mb-4"
             />
 
             <input
@@ -134,7 +138,7 @@ export default function ResetPassword() {
               onChange={(e) =>
                 setFormData({ ...formData, newPassword: e.target.value })
               }
-              className="border p-3 w-full rounded mb-4"
+              className="border border-white/20 bg-black/40 text-white p-3 w-full rounded mb-4"
             />
 
             <input
@@ -148,7 +152,7 @@ export default function ResetPassword() {
                   confirmPassword: e.target.value,
                 })
               }
-              className="border p-3 w-full rounded mb-4"
+              className="border border-white/20 bg-black/40 text-white p-3 w-full rounded mb-4"
             />
 
             <button

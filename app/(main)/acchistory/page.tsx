@@ -115,17 +115,10 @@ function AccHistory() {
               Tổng số tài khoản: <span className="font-bold text-blue-400 drop-shadow-[0_0_5px_rgba(96,165,250,0.8)] text-xl">{accounts.length}</span>
             </p>
           </div>
-          <button
-            onClick={fetchAccounts}
-            className="bg-blue-600/80 backdrop-blur-md text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition font-semibold shadow-[0_0_15px_rgba(37,99,235,0.4)] flex items-center gap-2 uppercase tracking-wide cursor-pointer"
-          >
-            <span>🔄</span> Làm mới
-          </button>
         </div>
 
         {accounts.length === 0 ? (
           <div className="bg-black/50 backdrop-blur-md border border-white/10 rounded-2xl p-16 text-center shadow-2xl">
-            <div className="text-6xl mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">📦</div>
             <p className="text-gray-200 text-xl font-medium drop-shadow-md">Chưa có tài khoản nào</p>
           </div>
         ) : (
