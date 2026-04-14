@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
   // ✅ Title dài hơn, chứa từ khóa cạnh tranh trực tiếp
   title: {
-    default: "Ngọc Rồng Dark (NroDark) - Game Dragon Ball MMORPG Việt Nam | Chơi Ngay",
+    default: "Ngọc Rồng Dark - Game Dragon Ball MMORPG Việt Nam | NroDark | Chơi Ngay",
     template: "%s | Ngọc Rồng Dark",
   },
 
