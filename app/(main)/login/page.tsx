@@ -160,6 +160,16 @@ setLoading(false);
     }
   };
 
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center  bg-no-repeat bg-center bg-fixed bg-cover" style={{ backgroundImage: "url('/assets/br.jpg')" }}>
+        <div className="text-center">
+          <div className="animate-spin h-16 w-16 border-b-2 border-blue-500 mx-auto rounded-full"></div>
+          <p className="mt-4 text-gray-600">Đang tải thông tin...</p>
+        </div>
+      </div>
+    );
+
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative bg-cover bg-center" style={{ backgroundImage: "url('/assets/br.jpg')" }}>

@@ -21,6 +21,8 @@ export default function Navbar() {
     { href: "/bangxh", label: "BẢNG XH" },
     { href: "/user", label: "USER" },
   ]
+
+  
  
   return (
     <nav className="bg-[#FFC000] shadow-xl sticky top-0 z-50">

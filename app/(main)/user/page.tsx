@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../src/redux/store";
@@ -63,16 +63,19 @@ export default function User() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { data: user, loading, error } = useSelector((state: RootState) => state.profile);
+  const [hasRequestedProfile, setHasRequestedProfile] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
+    setHasRequestedProfile(true);
     dispatch(fetchProfileStart());
   }, [dispatch]);
 
   useEffect(() => {
-    if (!loading && (error || !user)) {
+    if (hasRequestedProfile && !loading && (error || !user)) {
       router.push("/login");
     }
-  }, [loading, error, user, router]);
+  }, [hasRequestedProfile, loading, error, user, router]);
 
   const formatNumber = (value: any): number => {
     if (typeof value === 'number') return value;
@@ -150,13 +153,22 @@ export default function User() {
             </button>
             <button
               onClick={() => {
+                setIsLoggingOut(true);
                 localStorage.removeItem("currentUser");
                 dispatch(clearProfile());
                 router.push("/login");
               }}
-              className="bg-red-500/50 backdrop-blur-sm border border-red-500/50 text-white hover:bg-red-500/80 px-4 py-2 rounded shadow-[0_4px_6px_rgba(0,0,0,0.3)] text-sm font-medium transition-all hover:-translate-y-0.5"
+              disabled={isLoggingOut}
+              className="bg-red-500/50 backdrop-blur-sm border border-red-500/50 text-white hover:bg-red-500/80 px-4 py-2 rounded shadow-[0_4px_6px_rgba(0,0,0,0.3)] text-sm font-medium transition-all hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
-              Đăng xuất
+              {isLoggingOut ? (
+                <span className="inline-flex items-center gap-2">
+                  <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  Đang đăng xuất...
+                </span>
+              ) : (
+                "Đăng xuất"
+              )}
             </button>
           </div>
         </div>
