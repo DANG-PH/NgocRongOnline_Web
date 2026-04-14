@@ -15,7 +15,10 @@ export const metadata: Metadata = {
 
   // ✅ Description dài hơn, chứa từ khóa người ta hay search
   description:
-    "Ngọc Rồng Dark - Server Ngọc Rồng Online private mới nhất 2026. Chơi miễn phí, PvP real-time, hệ thống bang hội, kỹ năng Dragon Ball đỉnh cao. Đăng ký ngay!",
+    `Ngọc Rồng Dark - Server Ngọc Rồng Online private uy tín mới nhất 2026, 
+                  lấy cảm hứng từ Dragon Ball. Chiến đấu PvP real-time, luyện kỹ năng 
+                  Kamehameha, Kaioken, tham gia bang hội, tranh đoạt Ngọc Rồng. 
+                  Hoàn toàn miễn phí - Đăng ký chơi ngay!`,
 
   // ✅ Thêm nhiều từ khóa dài (long-tail keywords)
   keywords: [
@@ -57,7 +60,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ngọc Rồng Dark - Game Dragon Ball MMORPG Việt Nam",
     description:
-      "Server Ngọc Rồng Online private mới nhất. PvP real-time, bang hội, kỹ năng đỉnh cao. Chơi miễn phí ngay hôm nay!",
+      `Ngọc Rồng Dark - Server Ngọc Rồng Online private uy tín mới nhất 2026, 
+                  lấy cảm hứng từ Dragon Ball. Chiến đấu PvP real-time, luyện kỹ năng 
+                  Kamehameha, Kaioken, tham gia bang hội, tranh đoạt Ngọc Rồng. 
+                  Hoàn toàn miễn phí - Đăng ký chơi ngay!`,
     url: BASE_URL,
     siteName: "Ngọc Rồng Dark",
     images: [
@@ -77,7 +83,7 @@ export const metadata: Metadata = {
     title: "Ngọc Rồng Dark - Game Dragon Ball MMORPG",
     description: `Ngọc Rồng Dark - Server Ngọc Rồng Online private uy tín mới nhất 2026, 
                   lấy cảm hứng từ Dragon Ball. Chiến đấu PvP real-time, luyện kỹ năng 
-                  Kamehameha, Kiaiho, tham gia bang hội, tranh đoạt Ngọc Rồng. 
+                  Kamehameha, Kaioken, tham gia bang hội, tranh đoạt Ngọc Rồng. 
                   Hoàn toàn miễn phí - Đăng ký chơi ngay!`,
     images: ["/assets/head1.webp"],
     site: "@ngocrongdark", // thêm nếu có Twitter/X
