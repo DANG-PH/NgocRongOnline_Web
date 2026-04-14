@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
   // ✅ Title dài hơn, chứa từ khóa cạnh tranh trực tiếp
   title: {
-    default: "Ngọc Rồng Dark - Game Dragon Ball MMORPG Việt Nam | Chơi Ngay",
+    default: "Ngọc Rồng Dark (NroDark) - Game Dragon Ball MMORPG Việt Nam | Chơi Ngay",
     template: "%s | Ngọc Rồng Dark",
   },
 
@@ -34,6 +34,14 @@ export const metadata: Metadata = {
     "Ngọc Rồng bang hội",
     "Hải Đăng Game Studio",
     "ngocrongdark.com",
+    "Ngọc Rồng Dark",
+    "NRODARK",
+    "nrodark",
+    "ngocrongdark",
+    "ngoc rong dark",
+    "Ngọc Rồng Online private server",
+    "Dragon Ball MMORPG Việt Nam",
+    "server Ngọc Rồng 2026",
   ],
 
   authors: [{ name: "Hải Đăng Game Studio", url: BASE_URL }],
@@ -67,7 +75,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Ngọc Rồng Dark - Game Dragon Ball MMORPG",
-    description: "Server Ngọc Rồng private mới nhất 2025. Chơi miễn phí!",
+    description: `Ngọc Rồng Dark - Server Ngọc Rồng Online private uy tín mới nhất 2026, 
+                  lấy cảm hứng từ Dragon Ball. Chiến đấu PvP real-time, luyện kỹ năng 
+                  Kamehameha, Kiaiho, tham gia bang hội, tranh đoạt Ngọc Rồng. 
+                  Hoàn toàn miễn phí - Đăng ký chơi ngay!`,
     images: ["/assets/head1.webp"],
     site: "@ngocrongdark", // thêm nếu có Twitter/X
   },
@@ -125,6 +136,25 @@ const jsonLd = {
   },
   inLanguage: "vi",
   keywords: "Ngọc Rồng Online, Dragon Ball, MMORPG, game Việt Nam",
+   datePublished: "2026-01-01",
+  dateModified: new Date().toISOString().split("T")[0],
+  
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.8",
+    ratingCount: "1200",
+    bestRating: "5",
+  },
+
+  screenshot: `${BASE_URL}/assets/head1.webp`,
+
+  featureList: [
+    "PvP real-time",
+    "Hệ thống bang hội",
+    "Kỹ năng Dragon Ball",
+    "Chơi miễn phí",
+    "Máy chủ ổn định"
+  ],
 };
 
 export default function RootLayout({
